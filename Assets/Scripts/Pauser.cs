@@ -9,11 +9,11 @@ public class Pauser : MonoBehaviour {
 		if(Input.GetKeyUp(KeyCode.P))
 		{
 			paused = !paused;
+			if(paused)
+				Time.timeScale = 0;
+			else
+				Time.timeScale = 1;
 		}
 
-		if(paused)
-			Time.timeScale = 0;
-		else
-			Time.timeScale = 1;
 	}
 }
