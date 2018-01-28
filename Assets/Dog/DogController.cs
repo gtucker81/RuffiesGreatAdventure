@@ -5,9 +5,9 @@ using UnityEngine;
 public class DogController : MonoBehaviour
 {
 
-    [HideInInspector] public bool facingRight = true;
-    [HideInInspector] public bool jump = true;
-    [HideInInspector] public bool bark = false;
+    public bool facingRight = true;
+    public bool jump = false;
+    public bool bark = false;
 
     public float moveForce = 365f;
     public float maxSpeed = 5f;

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  jump: 1
+  jump: 0
   bark: 0
   moveForce: 365
   maxSpeed: 5
