@@ -18,6 +18,12 @@ public class WaveModeController : MonoBehaviour {
 	public Wave houndWave;
 	public Wave targetWave;
 
+	public LineRenderer HoundLine;
+	public LineRenderer TargetLine;
+
+	public float xFactor = 0.1f;
+	public float yFactor = 2f;
+
 	//public float bulletTime = 0.25f;
 	//float normalTime = 1;
 
@@ -59,20 +65,20 @@ public class WaveModeController : MonoBehaviour {
 	void Activate () {
 		targetWave = target.GetComponent<Enemy>().wave;
 		waveModeActive = true;
-		waveform.gameObject.SetActive (true);
-		targetWaveform.gameObject.SetActive (true);
-		//Debug.Log ("setting timescale to: " + bulletTime);
-		//Time.timeScale = bulletTime;
-		//Time.fixedDeltaTime *= bulletTime;
-		//Debug.Log ("timescale is now: " + Time.timeScale);
+		//waveform.gameObject.SetActive (true);
+		//targetWaveform.gameObject.SetActive (true);
+		HoundLine.gameObject.SetActive(true);
+		TargetLine.gameObject.SetActive(true);
 		ApplyBulletTime();
 	}
 
 	void Deactivate () {
 		target = null;
 		waveModeActive = false;
-		waveform.gameObject.SetActive (false);
-		targetWaveform.gameObject.SetActive (false);
+		//waveform.gameObject.SetActive (false);
+		//targetWaveform.gameObject.SetActive (false);
+		HoundLine.gameObject.SetActive(false);
+		TargetLine.gameObject.SetActive(false);
 		//Time.timeScale = normalTime;
 		UnApplyBulletTime();
 	}
@@ -83,7 +89,7 @@ public class WaveModeController : MonoBehaviour {
 		//mouseAmplitude = Mathf.Sin(Time.time);
 		//mouseFrequency = Mathf.Sin(Time.time);
 		mouseAmplitude += input.y * sensitivity;
-		mouseFrequency += input.x * sensitivity;
+		mouseFrequency -= input.x * sensitivity;
 
 		houndWave.amplitude = roundToFloat(mouseAmplitude, snap);
 		houndWave.frequency = roundToFloat(mouseFrequency, snap);
@@ -109,6 +115,23 @@ public class WaveModeController : MonoBehaviour {
 	void DrawWaves () {
 		waveform.localScale = Vector3.up * houndWave.amplitude + Vector3.right * houndWave.frequency + Vector3.forward;
 		targetWaveform.localScale = Vector3.up * targetWave.amplitude + Vector3.right * targetWave.frequency + Vector3.forward;
+
+		int halfPositions = HoundLine.positionCount / 2;
+		int x;
+		for (x = -halfPositions; x < halfPositions; x++) {
+			Vector3 pos = Vector3.zero;
+			float y = houndWave.amplitude * Mathf.Sin (x * xFactor * houndWave.frequency) * yFactor;
+			pos += Vector3.right * (x * xFactor);
+			pos -= Vector3.forward * y;
+			HoundLine.SetPosition (x + halfPositions, pos);
+		}
+		for (x = -halfPositions; x < halfPositions; x++) {
+			Vector3 pos = Vector3.zero;
+			float y = targetWave.amplitude * Mathf.Sin (x * xFactor * targetWave.frequency) * yFactor;
+			pos += Vector3.right * (x * xFactor);
+			pos -= Vector3.forward * y;
+			TargetLine.SetPosition (x + halfPositions, pos);
+		}
 	}
 
 	bool CheckClickOnEnemy () {

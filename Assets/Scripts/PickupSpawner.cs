@@ -11,13 +11,13 @@ public class PickupSpawner : MonoBehaviour
 	public float lowHealthThreshold = 25f;		// The health of the player, below which only health crates will be delivered.
 
 
-	private PlayerHealth playerHealth;			// Reference to the PlayerHealth script.
+	private DogHealth playerHealth;			// Reference to the PlayerHealth script.
 
 
 	void Awake ()
 	{
 		// Setting up the reference.
-		playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+		playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<DogHealth>();
 	}
 
 
