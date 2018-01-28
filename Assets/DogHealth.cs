@@ -72,7 +72,7 @@ public class DogHealth : MonoBehaviour
     }
 
 
-    void TakeDamage(Transform enemy)
+    public void TakeDamage(Transform enemy)
     {
         // Make sure the player can't jump.
         dogControl.jump = false;

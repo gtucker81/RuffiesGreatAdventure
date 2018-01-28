@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
-	private bool dead = false;			// Whether or not the enemy is dead.
+	public bool dead = false;			// Whether or not the enemy is dead.
 	private Score score;				// Reference to the Score script.
 
 	
@@ -121,6 +121,9 @@ public class Enemy : MonoBehaviour
 
 		// Instantiate the 100 points prefab at this point.
 		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
+
+		//Destroy ourselves after 5 seconds
+		//Destroy(gameObject, 5f);
 	}
 
 
