@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour
 {
 	public float moveSpeed = 2f;		// The speed the enemy moves at.
 	public int HP = 2;					// How many times the enemy can be hit before it dies.
+	public bool invincible = false;
+	public bool canTeleportTo = false;
 	public Sprite deadEnemy;			// A sprite of the enemy when it's dead.
 	public Sprite damagedEnemy;			// An optional sprite of the enemy when it's damaged.
 	public AudioClip[] deathClips;		// An array of audioclips that can play when the enemy dies.
@@ -51,20 +53,25 @@ public class Enemy : MonoBehaviour
 		GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * moveSpeed, GetComponent<Rigidbody2D>().velocity.y);	
 
 		// If the enemy has one hit point left and has a damagedEnemy sprite...
-		if(HP == 1 && damagedEnemy != null)
+		if (HP == 1 && damagedEnemy != null) {
 			// ... set the sprite renderer's sprite to be the damagedEnemy sprite.
 			ren.sprite = damagedEnemy;
-			
-		// If the enemy has zero or fewer hit points and isn't dead yet...
-		if(HP <= 0 && !dead)
-			// ... call the death function.
-			Death ();
+		}
+
 	}
 	
 	public void Hurt()
 	{
-		// Reduce the number of hit points by one.
-		HP--;
+		if (invincible == false) {
+			// Reduce the number of hit points by one.
+			HP--;
+
+			// If the enemy has zero or fewer hit points and isn't dead yet...
+			if (HP <= 0 && !dead) {
+				// ... call the death function.
+				Death ();
+			}
+		}
 	}
 	
 	void Death()
@@ -89,6 +96,9 @@ public class Enemy : MonoBehaviour
 
 		// Set dead to true.
 		dead = true;
+
+		// Allow teleporting to this enemy now that it is dead
+		canTeleportTo = true;
 
 		// Allow the enemy to rotate and spin it by adding a torque.
 		GetComponent<Rigidbody2D>().AddTorque(Random.Range(deathSpinMin,deathSpinMax));

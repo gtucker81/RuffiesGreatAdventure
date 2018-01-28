@@ -31,6 +31,7 @@ public class WaveModeController : MonoBehaviour {
 	float normalFixedDeltaTime;
 
 	GameObject target;
+	public GameObject player;
 
 	void Awake () {
 		houndWave = new Wave (1f, 1f);
@@ -147,9 +148,20 @@ public class WaveModeController : MonoBehaviour {
 		return false;
 	}
 
+
+
 	void DamageTarget () {
-		target.GetComponent<Enemy>().Hurt();
+		Enemy enemy = target.GetComponent<Enemy> ();
+		enemy.Hurt();
+		if (enemy.canTeleportTo) {
+			Teleport ();
+		}
 	}
+
+	void Teleport () {
+		player.transform.position = target.transform.position;
+	}
+
 
 	void ApplyBulletTime () {
 		Time.timeScale = bulletTimeFactor;
