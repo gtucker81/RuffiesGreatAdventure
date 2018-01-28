@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114459929186687970}
   - component: {fileID: 50092505777567236}
   - component: {fileID: 61758214861111698}
+  - component: {fileID: 114015265644333788}
   m_Layer: 9
   m_Name: Dog_K_9
   m_TagString: Player
@@ -135,6 +136,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114015265644333788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181228038942638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68245a07a21c2493b84d3cf683522f9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  repeatDamagePeriod: 2
+  ouchClips: []
+  hurtForce: 10
+  damageAmount: 25
 --- !u!114 &114459929186687970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,7 +168,7 @@ MonoBehaviour:
   bark: 0
   moveForce: 365
   maxSpeed: 10
-  jumpForce: 750
+  jumpForce: 1000
   groundCheck: {fileID: 4955717097721464}
   anim: {fileID: 0}
 --- !u!212 &212023133731345482
@@ -185,8 +202,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1783731295
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300018, guid: b6d351c7630564f209f9c40654c03ced, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
