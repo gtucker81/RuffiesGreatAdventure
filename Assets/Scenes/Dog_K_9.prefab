@@ -150,8 +150,8 @@ MonoBehaviour:
   jump: 0
   bark: 0
   moveForce: 365
-  maxSpeed: 5
-  jumpForce: 1000
+  maxSpeed: 10
+  jumpForce: 750
   groundCheck: {fileID: 4955717097721464}
   anim: {fileID: 0}
 --- !u!212 &212023133731345482
