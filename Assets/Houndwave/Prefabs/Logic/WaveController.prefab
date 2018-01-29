@@ -303,6 +303,7 @@ MonoBehaviour:
   xFactor: 0.1
   yFactor: 2
   bulletTimeFactor: 0.05
+  player: {fileID: 0}
 --- !u!120 &120142282749564482
 LineRenderer:
   m_ObjectHideFlags: 1
